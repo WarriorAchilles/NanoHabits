@@ -107,6 +107,7 @@ A separate [Next.js + Tailwind website](https://zionemond.dev) will feature:
 - Portfolio-style breakdowns of major features
 - Branding and design rationale
 
+repo [here](https://github.com/WarriorAchilles/dev-blog)
 ---
 
 ## 🤝 Contributing
