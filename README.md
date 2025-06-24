@@ -1,5 +1,7 @@
 # NanoHabits AI
 
+![nanohabits-wordmark](/assets/images/NanoHabits-Wordmark.png)
+
 **NanoHabits AI** is a minimalist, cross-platform habit tracker powered by AI. It helps users break down their big goals into small, actionable habits — the nano building blocks of personal growth.
 
 ---
