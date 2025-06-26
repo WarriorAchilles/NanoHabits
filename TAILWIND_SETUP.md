@@ -16,6 +16,24 @@ npm install --save-dev tailwindcss@latest prettier prettier-plugin-tailwindcss
 - `tailwind.config.js`: Tailwind CSS configuration with NativeWind preset and custom colors
 - `package.json`: Contains NativeWind and related dependencies
 
+## Custom Font Family
+
+This project uses **Poppins** (Google Font) as the primary font family with multiple weights:
+
+### Available Font Weights
+- `font-light`: Poppins Light
+- `font-normal`: Poppins Regular (default)
+- `font-medium`: Poppins Medium
+- `font-bold`: Poppins Bold
+- `font-mono`: SpaceMono (for code/monospace text)
+
+### Font Files Required
+Add these files to `assets/fonts/`:
+- `Poppins-Regular.ttf`
+- `Poppins-Light.ttf`
+- `Poppins-Medium.ttf`
+- `Poppins-Bold.ttf`
+
 ## Custom Color Palette
 
 This project includes a custom color palette designed for optimal readability and dark mode support:
@@ -34,7 +52,7 @@ This project includes a custom color palette designed for optimal readability an
 
 NativeWind allows you to use Tailwind CSS classes directly in your React Native components using the `className` prop.
 
-### Basic Usage with Custom Colors
+### Basic Usage with Custom Colors and Fonts
 
 ```tsx
 import React from 'react';
@@ -43,22 +61,46 @@ import { View, Text } from 'react-native';
 export default function MyComponent() {
   return (
     <View className="flex-1 bg-bg-primary p-4">
-      <Text className="text-text-primary text-xl font-bold mb-2">
+      <Text className="text-text-primary text-xl font-light mb-2">
         Welcome to NanoHabits
       </Text>
-      <Text className="text-text-secondary">
-        Built with NativeWind
+      <Text className="text-text-secondary font-medium">
+        Built with NativeWind and Poppins
       </Text>
     </View>
   );
 }
 ```
 
+### Typography Examples
+
+```tsx
+{/* Light weight for headings */}
+<Text className="text-text-primary text-2xl font-light">
+  Main Heading
+</Text>
+
+{/* Medium weight for body text */}
+<Text className="text-text-primary text-base font-medium">
+  Body text with medium weight
+</Text>
+
+{/* Bold weight for emphasis */}
+<Text className="text-text-primary text-lg font-bold">
+  Important information
+</Text>
+
+{/* Monospace for code */}
+<Text className="text-text-primary font-mono">
+  const example = "code";
+</Text>
+```
+
 ### Using Base Colors Directly
 
 ```tsx
 <View className="bg-off-white dark:bg-off-black">
-  <Text className="text-off-black dark:text-off-white">
+  <Text className="text-off-black dark:text-off-white font-light">
     Direct color usage
   </Text>
 </View>
@@ -68,10 +110,10 @@ export default function MyComponent() {
 
 ```tsx
 <View className="bg-bg-primary">
-  <Text className="text-text-primary">
+  <Text className="text-text-primary font-light">
     Automatically adapts to light/dark mode
   </Text>
-  <Text className="text-text-secondary">
+  <Text className="text-text-secondary font-medium">
     Secondary text also adapts
   </Text>
 </View>
@@ -83,6 +125,7 @@ export default function MyComponent() {
 - **Responsive design**: Use responsive prefixes like `sm:`, `md:`, `lg:`
 - **Dark mode**: Use `dark:` prefix for dark mode styles or semantic colors
 - **Custom classes**: Define custom classes in your `tailwind.config.js`
+- **Typography**: Poppins font family with multiple weights
 
 ### Example with Multiple Classes
 
@@ -97,7 +140,7 @@ export default function ButtonExample() {
         className="bg-blue-500 px-6 py-3 rounded-lg shadow-lg active:bg-blue-600"
         onPress={() => console.log('Button pressed!')}
       >
-        <Text className="text-white font-semibold text-lg">
+        <Text className="text-white font-medium text-lg">
           Press Me
         </Text>
       </TouchableOpacity>
@@ -110,7 +153,7 @@ export default function ButtonExample() {
 
 ```tsx
 <View className="w-full md:w-1/2 lg:w-1/3">
-  <Text className="text-sm md:text-base lg:text-lg text-text-primary">
+  <Text className="text-sm md:text-base lg:text-lg text-text-primary font-light">
     Responsive text
   </Text>
 </View>
@@ -120,7 +163,7 @@ export default function ButtonExample() {
 
 ```tsx
 <View className="bg-bg-primary">
-  <Text className="text-text-primary">
+  <Text className="text-text-primary font-light">
     Dark mode compatible text
   </Text>
 </View>
@@ -133,6 +176,7 @@ export default function ButtonExample() {
 - **Better performance**: Optimized for React Native
 - **TypeScript support**: Full TypeScript support out of the box
 - **Active development**: Regularly updated and maintained
+- **Custom typography**: Beautiful Poppins font family
 
 ## Development Tips
 
@@ -141,6 +185,7 @@ export default function ButtonExample() {
 3. **Hot reload**: Changes to Tailwind classes work with hot reload
 4. **Custom themes**: Extend the theme in `tailwind.config.js` for project-specific styles
 5. **Semantic colors**: Use `text-primary`, `bg-primary`, etc. for consistent theming
+6. **Typography hierarchy**: Use `font-light` for headings, `font-medium` for body text
 
 ## Troubleshooting
 
@@ -148,11 +193,12 @@ If you encounter issues:
 
 1. **Restart the development server** after configuration changes
 2. **Clear Metro cache**: `npx expo start --clear`
-3. **Check Tailwind config**: Ensure `nativewind/preset` is included in presets
-4. **Verify imports**: Make sure you're importing React Native components correctly
+3. **Verify imports**: Make sure you're importing React Native components correctly
+4. **Font loading**: Ensure all Poppins font files are in `assets/fonts/`
 
 ## Resources
 
 - [NativeWind Documentation](https://www.nativewind.dev/)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [React Native Documentation](https://reactnative.dev/) 
+- [React Native Documentation](https://reactnative.dev/)
+- [Poppins Google Font](https://fonts.google.com/specimen/Poppins) 

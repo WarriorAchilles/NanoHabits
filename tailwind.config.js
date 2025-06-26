@@ -1,12 +1,18 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  presets: [require('nativewind/preset')],
   content: [
     "./app/**/*.{js,jsx,ts,tsx}",
     "./components/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'sans': ['Poppins', 'system-ui', 'sans-serif'],
+        'light': ['Poppins', 'system-ui', 'sans-serif'],
+        'medium': ['Poppins', 'system-ui', 'sans-serif'],
+        'bold': ['Poppins', 'system-ui', 'sans-serif'],
+        'mono': ['SpaceMono', 'monospace'],
+      },
       colors: {
         // Custom color palette
         'off-black': '#1A1A1A',

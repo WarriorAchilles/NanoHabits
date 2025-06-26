@@ -1,14 +1,15 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Platform, View, Text } from 'react-native';
+import { Platform, View } from 'react-native';
 import EditScreenInfo from '@/components/EditScreenInfo';
+import { StyledText } from '@/components/StyledText';
 
 export default function ModalScreen() {
   return (
     <View className="flex-1 items-center justify-center bg-bg-primary">
-      <Text className="text-text-primary text-xl font-bold mb-8">
+      <StyledText className="text-text-primary text-xl font-light mb-8">
         Modal
-      </Text>
+      </StyledText>
       <View className="w-4/5 h-px bg-text-secondary mb-8" />
       <EditScreenInfo path="app/modal.tsx" />
 
