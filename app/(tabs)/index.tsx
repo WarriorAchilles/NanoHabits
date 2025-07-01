@@ -1,15 +1,16 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import EditScreenInfo from '@/components/EditScreenInfo';
 import { StyledText } from '@/components/StyledText';
+import { masterStyles } from '@/constants/tokens';
 
 export default function TabOneScreen() {
   return (
-    <View className="flex-1 items-center justify-center bg-bg-primary">
-      <StyledText className="text-text-primary text-xl font-bold mb-8">
+    <View style={masterStyles.centeredContainer}>
+      <StyledText style={masterStyles.titleBold} weight="bold" size={20}>
         Welcome to NanoHabits (tab one content)
       </StyledText>
-      <View className="w-4/5 h-px bg-text-secondary mb-8" />
+      <View style={masterStyles.divider} />
       <EditScreenInfo path="app/(tabs)/index.tsx" />
     </View>
   );

@@ -2,14 +2,15 @@ import React from 'react';
 import { View } from 'react-native';
 import EditScreenInfo from '@/components/EditScreenInfo';
 import { StyledText } from '@/components/StyledText';
+import { masterStyles } from '@/constants/tokens';
 
 export default function TabTwoScreen() {
   return (
-    <View className="flex-1 items-center justify-center bg-bg-primary">
-      <StyledText className="text-text-primary text-xl font-light mb-8">
+    <View style={masterStyles.centeredContainer}>
+      <StyledText style={masterStyles.titleLight} weight="light" size={20}>
         Tab Two content
       </StyledText>
-      <View className="w-4/5 h-px bg-text-secondary mb-8" />
+      <View style={masterStyles.divider} />
       <EditScreenInfo path="app/(tabs)/two.tsx" />
     </View>
   );
