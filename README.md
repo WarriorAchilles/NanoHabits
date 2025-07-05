@@ -80,7 +80,6 @@ NanoHabits embraces a clean, calming aesthetic:
 - **Theme**: Minimalist dark mode (inspired by Notion, Linear)
 - **Visual Identity**:
   - Dot motifs (nano actions)
-  - Abstract cheese icons (symbolizing rewards and habit loops)
   - Typography: clean sans-serif for a developer-pro look
 - **Color Use**: Mostly monochrome with occasional soft accents (green/yellow)
 
