@@ -24,6 +24,71 @@ function NanoHabitsIcon() {
   );
 }
 
+// Reusable tab configuration function
+function createTabOptions(title: string, colorScheme: 'light' | 'dark' | null | undefined) {
+  const currentColors = colors[colorScheme ?? 'light'];
+  
+  return {
+    title,
+    headerTitleAlign: 'center' as const,
+    headerTitle: () => (
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <Text style={{
+          color: currentColors.text,
+          fontWeight: 'bold' as const,
+          fontFamily: 'Poppins-Bold',
+          fontSize: 18
+        }}>
+          {title}
+        </Text>
+      </View>
+    ),
+    tabBarIcon: ({ focused }: { focused: boolean }) => (
+      <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+        <Text style={{
+          fontFamily: focused ? 'Poppins-Bold' : 'Poppins',
+          fontSize: 16,
+          marginTop: 4
+        }}>
+          {title}
+        </Text>
+      </View>
+    ),
+    headerLeft: () => <NanoHabitsIcon />,
+    headerRight: () => (
+      <Link href="/modal" asChild>
+        <Pressable>
+          {({ pressed }) => (
+            <FontAwesome6
+              name="bars"
+              size={25}
+              color={currentColors.text}
+              style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+            />
+          )}
+        </Pressable>
+      </Link>
+    ),
+    headerTitleStyle: {
+      color: currentColors.text,
+      fontWeight: 'bold' as const,
+      marginBottom: 32,
+      fontFamily: 'Poppins-Bold',
+    },
+    headerStyle: {
+      backgroundColor: currentColors.background,
+    },
+    headerStatusBarHeight: 50,
+    headerShadowVisible: false,
+    tabBarShowLabel: false,
+    tabBarStyle: {
+      backgroundColor: currentColors.background,
+      borderTopWidth: 1, // Increase this value to make the divider thicker
+      borderTopColor: currentColors.divider, // Use the divider color from your theme
+    },
+  };
+}
+
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
@@ -37,138 +102,15 @@ export default function TabLayout() {
       }}>
       <Tabs.Screen
         name="index"
-        options={{
-          title: 'Goals',
-          headerTitleAlign: 'center',
-          headerTitle: () => (
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Text style={{
-                color: colors[colorScheme ?? 'light'].text,
-                fontWeight: 'bold',
-                fontFamily: 'Poppins-Bold',
-                fontSize: 18
-              }}>
-                Goals
-              </Text>
-            </View>
-          ),
-          tabBarIcon: () => <View />,
-          headerLeft: () => <NanoHabitsIcon />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome6
-                    name="bars"
-                    size={25}
-                    color={colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
-          headerTitleStyle: {
-            color: colors[colorScheme ?? 'light'].text,
-            fontWeight: 'bold',
-            marginBottom: 32,
-            fontFamily: 'Poppins-Bold',
-          },
-          headerStyle: {
-            backgroundColor: colors[colorScheme ?? 'light'].background,
-          },
-          headerShadowVisible: false
-        }}
+        options={createTabOptions('Goals', colorScheme)}
       />
       <Tabs.Screen
         name="two"
-        options={{
-          title: 'Habits',
-          headerTitleAlign: 'center',
-          headerTitle: () => (
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Text style={{
-                color: colors[colorScheme ?? 'light'].text,
-                fontWeight: 'bold',
-                fontFamily: 'Poppins-Bold',
-                fontSize: 18
-              }}>
-                Habits
-              </Text>
-            </View>
-          ),
-          tabBarIcon: () => <View />,
-          headerLeft: () => <NanoHabitsIcon />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome6
-                    name="bars"
-                    size={25}
-                    color={colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
-          headerTitleStyle: {
-            color: colors[colorScheme ?? 'light'].text,
-            fontWeight: 'bold',
-            marginBottom: 32,
-            fontFamily: 'Poppins-Bold',
-          },
-          headerStyle: {
-            backgroundColor: colors[colorScheme ?? 'light'].background,
-          },
-          headerShadowVisible: false
-        }}
+        options={createTabOptions('Habits', colorScheme)}
       />
       <Tabs.Screen
         name="three"
-        options={{
-          title: 'Streaks',
-          headerTitleAlign: 'center',
-          headerTitle: () => (
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Text style={{
-                color: colors[colorScheme ?? 'light'].text,
-                fontWeight: 'bold',
-                fontFamily: 'Poppins-Bold',
-                fontSize: 18
-              }}>
-                Streaks
-              </Text>
-            </View>
-          ),
-          tabBarIcon: () => <View />,
-          headerLeft: () => <NanoHabitsIcon />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome6
-                    name="bars"
-                    size={25}
-                    color={colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
-          headerTitleStyle: {
-            color: colors[colorScheme ?? 'light'].text,
-            fontWeight: 'bold',
-            marginBottom: 32,
-            fontFamily: 'Poppins-Bold',
-          },
-          headerStyle: {
-            backgroundColor: colors[colorScheme ?? 'light'].background,
-          },
-          headerShadowVisible: false
-        }}
+        options={createTabOptions('Streaks', colorScheme)}
       />
     </Tabs>
   );
