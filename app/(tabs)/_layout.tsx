@@ -1,11 +1,10 @@
 import React from 'react';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import { Link, Tabs } from 'expo-router';
 import { Pressable, View, Text, Image } from 'react-native';
 
 import { colors } from '@/constants/tokens';
-import { useColorScheme } from '@/components/useColorScheme';
+// import { useColorScheme } from '@/components/useColorScheme';
 import { useClientOnlyValue } from '@/components/useClientOnlyValue';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
@@ -17,7 +16,6 @@ function NanoHabitsIcon() {
       style={{
         width: 80,
         height: 80,
-        marginLeft: 15,
         resizeMode: 'contain'
       }}
     />
@@ -37,7 +35,7 @@ function createTabOptions(title: string, colorScheme: 'light' | 'dark' | null | 
           color: currentColors.text,
           fontWeight: 'bold' as const,
           fontFamily: 'Poppins-Bold',
-          fontSize: 18
+          fontSize: 24
         }}>
           {title}
         </Text>
@@ -47,8 +45,10 @@ function createTabOptions(title: string, colorScheme: 'light' | 'dark' | null | 
       <View style={{ alignItems: 'center', justifyContent: 'center' }}>
         <Text style={{
           fontFamily: focused ? 'Poppins-Bold' : 'Poppins',
-          fontSize: 16,
-          marginTop: 4
+          fontSize: 18,
+          marginTop: 30,
+          width: '100%',
+          height: '100%'
         }}>
           {title}
         </Text>
@@ -90,7 +90,7 @@ function createTabOptions(title: string, colorScheme: 'light' | 'dark' | null | 
 }
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const colorScheme = 'light'; // todo: useColorScheme();
 
   return (
     <Tabs
