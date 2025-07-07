@@ -1,28 +1,27 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { ExternalLink } from './ExternalLink';
-import { MonoText, StyledText } from './StyledText';
 import { masterStyles } from '@/constants/tokens';
 
 export default function EditScreenInfo({ path }: { path: string }) {
   return (
     <View style={masterStyles.container}>
-      <StyledText style={masterStyles.secondaryText}>
+      <Text style={masterStyles.secondaryText}>
         Open up the code for this screen:
-      </StyledText>
+      </Text>
       <View style={masterStyles.codeContainer}>
-        <MonoText>{path}</MonoText>
+        <Text style={{ fontFamily: 'SpaceMono-Regular' }}>{path}</Text>
       </View>
-      <StyledText style={masterStyles.secondaryText}>
+      <Text style={masterStyles.secondaryText}>
         Change any of the text, save the file, and your app will automatically update.
-      </StyledText>
+      </Text>
       <View style={masterStyles.footerContainer}>
         <ExternalLink
           style={masterStyles.link}
           href="https://docs.expo.io/get-started/create-a-new-app/#opening-the-app-on-your-phonetablet">
-          <StyledText style={masterStyles.link}>
+          <Text style={masterStyles.link}>
             Tap here if your app doesn't automatically update after making changes
-          </StyledText>
+          </Text>
         </ExternalLink>
       </View>
     </View>

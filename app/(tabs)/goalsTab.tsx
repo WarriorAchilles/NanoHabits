@@ -1,17 +1,18 @@
 import React from 'react';
 import { View } from 'react-native';
 import EditScreenInfo from '@/components/EditScreenInfo';
-import { StyledText } from '@/components/StyledText';
 import { masterStyles } from '@/constants/tokens';
+import { Text } from 'react-native';
 
-export default function TabThreeScreen() {
+export default function goalsScreen() {
   return (
     <View style={masterStyles.centeredContainer}>
-      <StyledText style={masterStyles.titleLight} weight="light" size={20}>
-        Tab three content
-      </StyledText>
+      <Text style={masterStyles.titleLight}>
+        goals content
+      </Text>
       <View style={masterStyles.divider} />
-      <EditScreenInfo path="app/(tabs)/two.tsx" />
+      <EditScreenInfo path="app/(tabs)/goalsTab.tsx" />
     </View>
   );
 }
+ 

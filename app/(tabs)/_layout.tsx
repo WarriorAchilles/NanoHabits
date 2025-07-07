@@ -101,15 +101,15 @@ export default function TabLayout() {
         headerShown: useClientOnlyValue(false, true),
       }}>
       <Tabs.Screen
-        name="index"
+        name="goalsTab"
         options={createTabOptions('Goals', colorScheme)}
       />
       <Tabs.Screen
-        name="two"
+        name="habitsTab"
         options={createTabOptions('Habits', colorScheme)}
       />
       <Tabs.Screen
-        name="three"
+        name="streaksTab"
         options={createTabOptions('Streaks', colorScheme)}
       />
     </Tabs>
