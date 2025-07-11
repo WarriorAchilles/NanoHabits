@@ -5,6 +5,7 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
+import { DatabaseService } from '../services/database';
 
 import { useColorScheme } from '@/components/useColorScheme';
 
@@ -41,6 +42,10 @@ export default function RootLayout() {
       SplashScreen.hideAsync();
     }
   }, [loaded]);
+
+  useEffect(() => {
+    DatabaseService.initialize();
+  }, []);
 
   if (!loaded) {
     return null;
