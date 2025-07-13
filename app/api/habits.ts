@@ -2,6 +2,7 @@ import { DatabaseService } from '@/services/database';
 
 export async function GET() {
   try {
+    console.log('API hit. Getting habits...');
     const habits = await DatabaseService.getHabits();
     return Response.json(habits);
   } catch (error) {

@@ -2,7 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import EditScreenInfo from '@/components/EditScreenInfo';
 import { masterStyles } from '@/constants/tokens';
-import { ApiService, HabitWithCompletions } from '@/services/api';
+import { DatabaseService } from '@/services/database';
+
+// Define the type for habits with completions
+type HabitWithCompletions = {
+  id: string;
+  name: string;
+  frequency: string;
+  reminderTime?: string;
+  isActive: number;
+  createdAt: string;
+  updatedAt: string;
+  completions: Array<{
+    id: string;
+    habitId: string;
+    date: string;
+    createdAt: string;
+  }>;
+};
 
 export default function HabitsScreen() {
   const [habits, setHabits] = useState<HabitWithCompletions[]>([]);
@@ -17,7 +34,7 @@ export default function HabitsScreen() {
     try {
       setLoading(true);
       setError(null);
-      const habits = await ApiService.getHabits();
+      const habits = await DatabaseService.getHabits() as HabitWithCompletions[];
       setHabits(habits);
     } catch (err) {
       setError('Failed to load habits');
@@ -29,7 +46,7 @@ export default function HabitsScreen() {
 
   const addHabit = async (name: string) => {
     try {
-      await ApiService.createHabit({
+      await DatabaseService.createHabit({
         name,
         frequency: 'daily',
       });

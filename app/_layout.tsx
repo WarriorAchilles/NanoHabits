@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/components/useColorScheme';
+import { DatabaseService } from '@/services/database';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -31,6 +32,11 @@ export default function RootLayout() {
     ...FontAwesome.font,
   });
 
+  // Initialize database tables when app starts
+  useEffect(() => {
+    DatabaseService.initialize().catch(console.error);
+  }, []);
+
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
     if (error) throw error;
@@ -41,8 +47,6 @@ export default function RootLayout() {
       SplashScreen.hideAsync();
     }
   }, [loaded]);
-
-
 
   if (!loaded) {
     return null;
