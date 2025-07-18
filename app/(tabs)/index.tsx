@@ -166,7 +166,7 @@ export default function HabitsScreen() {
         </View>
       )}
       
-      <EditScreenInfo path="app/(tabs)/habitsTab.tsx" />
+      <EditScreenInfo path="app/(tabs)/index.tsx" />
     </View>
   );
 }

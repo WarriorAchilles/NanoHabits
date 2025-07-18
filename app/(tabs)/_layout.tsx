@@ -105,7 +105,7 @@ export default function TabLayout() {
         options={createTabOptions('Goals', colorScheme)}
       />
       <Tabs.Screen
-        name="habitsTab"
+        name="index"
         options={createTabOptions('Habits', colorScheme)}
       />
       <Tabs.Screen
