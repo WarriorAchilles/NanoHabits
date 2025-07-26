@@ -49,20 +49,7 @@ export default function HabitsScreen() {
     } finally {
       setLoading(false);
     }
-  }
-
-  const addHabit = async (name: string) => {
-    try {
-      await DatabaseService.createHabit({
-        name,
-        frequency: 'daily',
-      });
-      loadHabits();
-    } catch (err) {
-      setError('Failed to create habit');
-      console.error('Error creating habit:', err);
-    }
-  }
+  };
 
   const handleFormChange = (field: string, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
