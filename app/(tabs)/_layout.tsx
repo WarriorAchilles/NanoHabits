@@ -85,7 +85,7 @@ function createTabOptions(
     headerStyle: {
       backgroundColor: currentColors.background,
     },
-    headerStatusBarHeight: 50,
+    headerTintColor: currentColors.text,
     headerShadowVisible: false,
     tabBarShowLabel: false,
     tabBarStyle: {
@@ -97,7 +97,7 @@ function createTabOptions(
 }
 
 export default function TabLayout() {
-  const colorScheme = "light"; // todo: useColorScheme();
+  const colorScheme = "light";
 
   return (
     <Tabs

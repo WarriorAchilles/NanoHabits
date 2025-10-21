@@ -8,11 +8,14 @@ import { useFonts } from "expo-font";
 import { Stack, router } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
-import { Pressable, Text } from "react-native";
+import { Pressable, Text, View } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 
 import { useColorScheme } from "@/components/useColorScheme";
 import { DatabaseService } from "@/services/database";
+import { colors } from "@/constants/tokens";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -65,14 +68,27 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
+  return (
+    <View style={{ flex: 1, backgroundColor: colors.light.background }}>
+      <SafeAreaProvider style={{ backgroundColor: colors.light.background }}>
+        <StatusBar
+          style="dark"
+          backgroundColor={colors.light.background}
+          translucent={false}
+          hidden={false}
+          animated={true}
+        />
+        <RootLayoutNav />
+      </SafeAreaProvider>
+    </View>
+  );
 }
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={DefaultTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen

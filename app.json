@@ -11,21 +11,26 @@
     "splash": {
       "image": "./assets/images/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#F8F6F1"
     },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.zionem7.NanoHabits",
+      "statusBarStyle": "dark",
+      "statusBarBackgroundColor": "#F8F6F1",
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "UIViewControllerBasedStatusBarAppearance": true
       }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#F8F6F1"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "statusBarStyle": "dark",
+      "statusBarBackgroundColor": "#F8F6F1"
     },
     "web": {
       "bundler": "metro",
@@ -36,10 +41,7 @@
         "Cross-Origin-Opener-Policy": "same-origin"
       }
     },
-    "plugins": [
-      "expo-router",
-      "expo-sqlite"
-    ],
+    "plugins": ["expo-router", "expo-sqlite"],
     "experiments": {
       "typedRoutes": true
     },

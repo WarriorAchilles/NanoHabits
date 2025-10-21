@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, Button, TextInput } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import EditScreenInfo from "@/components/EditScreenInfo";
 import { masterStyles } from "@/constants/tokens";
 import { DatabaseService } from "@/services/database";
@@ -85,105 +86,113 @@ export default function HabitsScreen() {
   });
 
   return (
-    <View style={masterStyles.centeredContainer}>
-      <Text style={masterStyles.titleLight}>{today}</Text>
-      <View style={masterStyles.divider} />
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: masterStyles.centeredContainer.backgroundColor,
+      }}
+      edges={["top", "left", "right", "bottom"]}
+    >
+      <View style={masterStyles.centeredContainer}>
+        <Text style={masterStyles.titleLight}>{today}</Text>
+        <View style={masterStyles.divider} />
 
-      <Button
-        title={showForm ? "Cancel" : "Add Habit"}
-        onPress={() => {
-          setShowForm((prev) => !prev);
-          setError(null);
-        }}
-      />
+        <Button
+          title={showForm ? "Cancel" : "Add Habit"}
+          onPress={() => {
+            setShowForm((prev) => !prev);
+            setError(null);
+          }}
+        />
 
-      {showForm && (
-        <View style={{ width: "100%", marginVertical: 16 }}>
-          <TextInput
-            placeholder="Habit Name"
-            value={form.name}
-            onChangeText={(text) => handleFormChange("name", text)}
-            style={{
-              borderWidth: 1,
-              borderColor: "#ccc",
-              borderRadius: 6,
-              padding: 8,
-              marginBottom: 8,
-            }}
-          />
-          <TextInput
-            placeholder="Frequency (e.g. daily)"
-            value={form.frequency}
-            onChangeText={(text) => handleFormChange("frequency", text)}
-            style={{
-              borderWidth: 1,
-              borderColor: "#ccc",
-              borderRadius: 6,
-              padding: 8,
-              marginBottom: 8,
-            }}
-          />
-          <TextInput
-            placeholder="Reminder Time (optional)"
-            value={form.reminderTime}
-            onChangeText={(text) => handleFormChange("reminderTime", text)}
-            style={{
-              borderWidth: 1,
-              borderColor: "#ccc",
-              borderRadius: 6,
-              padding: 8,
-              marginBottom: 8,
-            }}
-          />
-          <Button
-            title={submitting ? "Submitting..." : "Submit"}
-            onPress={handleSubmit}
-            disabled={submitting}
-          />
-        </View>
-      )}
-
-      {loading && (
-        <Text style={masterStyles.secondaryText}>Loading habits...</Text>
-      )}
-
-      {error && (
-        <Text style={[masterStyles.secondaryText, { color: "red" }]}>
-          {error}
-        </Text>
-      )}
-
-      {!loading && !error && habits.length === 0 && (
-        <Text style={masterStyles.secondaryText}>
-          No habits yet. Create your first habit!
-        </Text>
-      )}
-
-      {!loading && !error && habits.length > 0 && (
-        <View>
-          {habits.map((habit) => (
-            <View
-              key={habit.id}
+        {showForm && (
+          <View style={{ width: "100%", marginVertical: 16 }}>
+            <TextInput
+              placeholder="Habit Name"
+              value={form.name}
+              onChangeText={(text) => handleFormChange("name", text)}
               style={{
-                marginVertical: 8,
-                padding: 16,
-                backgroundColor: "#f5f5f5",
-                borderRadius: 8,
+                borderWidth: 1,
+                borderColor: "#ccc",
+                borderRadius: 6,
+                padding: 8,
+                marginBottom: 8,
               }}
-            >
-              <Text style={masterStyles.titleLight}>{habit.name}</Text>
-              <Text style={masterStyles.secondaryText}>
-                Frequency: {habit.frequency}
-              </Text>
-              <Text style={masterStyles.secondaryText}>
-                Completions: {habit.completions?.length || 0}
-              </Text>
-            </View>
-          ))}
-        </View>
-      )}
+            />
+            <TextInput
+              placeholder="Frequency (e.g. daily)"
+              value={form.frequency}
+              onChangeText={(text) => handleFormChange("frequency", text)}
+              style={{
+                borderWidth: 1,
+                borderColor: "#ccc",
+                borderRadius: 6,
+                padding: 8,
+                marginBottom: 8,
+              }}
+            />
+            <TextInput
+              placeholder="Reminder Time (optional)"
+              value={form.reminderTime}
+              onChangeText={(text) => handleFormChange("reminderTime", text)}
+              style={{
+                borderWidth: 1,
+                borderColor: "#ccc",
+                borderRadius: 6,
+                padding: 8,
+                marginBottom: 8,
+              }}
+            />
+            <Button
+              title={submitting ? "Submitting..." : "Submit"}
+              onPress={handleSubmit}
+              disabled={submitting}
+            />
+          </View>
+        )}
 
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
-    </View>
+        {loading && (
+          <Text style={masterStyles.secondaryText}>Loading habits...</Text>
+        )}
+
+        {error && (
+          <Text style={[masterStyles.secondaryText, { color: "red" }]}>
+            {error}
+          </Text>
+        )}
+
+        {!loading && !error && habits.length === 0 && (
+          <Text style={masterStyles.secondaryText}>
+            No habits yet. Create your first habit!
+          </Text>
+        )}
+
+        {!loading && !error && habits.length > 0 && (
+          <View>
+            {habits.map((habit) => (
+              <View
+                key={habit.id}
+                style={{
+                  marginVertical: 8,
+                  padding: 16,
+                  backgroundColor: "#f5f5f5",
+                  borderRadius: 8,
+                }}
+              >
+                <Text style={masterStyles.titleLight}>{habit.name}</Text>
+                <Text style={masterStyles.secondaryText}>
+                  Frequency: {habit.frequency}
+                </Text>
+                <Text style={masterStyles.secondaryText}>
+                  Completions: {habit.completions?.length || 0}
+                </Text>
+              </View>
+            ))}
+          </View>
+        )}
+
+        <EditScreenInfo path="app/(tabs)/index.tsx" />
+      </View>
+    </SafeAreaView>
   );
 }
