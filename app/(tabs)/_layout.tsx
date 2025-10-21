@@ -1,55 +1,62 @@
-import React from 'react';
-import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
-import { Link, Tabs } from 'expo-router';
-import { Pressable, View, Text, Image } from 'react-native';
+import React from "react";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import { Link, Tabs } from "expo-router";
+import { Pressable, View, Text, Image } from "react-native";
 
-import { colors } from '@/constants/tokens';
+import { colors } from "@/constants/tokens";
 // import { useColorScheme } from '@/components/useColorScheme';
-import { useClientOnlyValue } from '@/components/useClientOnlyValue';
+import { useClientOnlyValue } from "@/components/useClientOnlyValue";
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 // NanoHabits icon component for header left
 function NanoHabitsIcon() {
   return (
     <Image
-      source={require('../../assets/images/nanohabits-icon.png')}
+      source={require("../../assets/images/nanohabits-icon.png")}
       style={{
         width: 80,
         height: 80,
-        resizeMode: 'contain'
+        resizeMode: "contain",
       }}
     />
   );
 }
 
 // Reusable tab configuration function
-function createTabOptions(title: string, colorScheme: 'light' | 'dark' | null | undefined) {
-  const currentColors = colors[colorScheme ?? 'light'];
-  
+function createTabOptions(
+  title: string,
+  colorScheme: "light" | "dark" | null | undefined
+) {
+  const currentColors = colors[colorScheme ?? "light"];
+
   return {
     title,
-    headerTitleAlign: 'center' as const,
+    headerTitleAlign: "center" as const,
     headerTitle: () => (
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <Text style={{
-          color: currentColors.text,
-          fontWeight: 'bold' as const,
-          fontFamily: 'Poppins-Bold',
-          fontSize: 24
-        }}>
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <Text
+          style={{
+            color: currentColors.text,
+            fontWeight: "bold" as const,
+            fontFamily: "Poppins-Bold",
+            fontSize: 24,
+          }}
+        >
           {title}
         </Text>
       </View>
     ),
     tabBarIcon: ({ focused }: { focused: boolean }) => (
-      <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-        <Text style={{
-          fontFamily: focused ? 'Poppins-Bold' : 'Poppins',
-          fontSize: 18,
-          marginTop: 30,
-          width: '100%',
-          height: '100%'
-        }}>
+      <View style={{ alignItems: "center", justifyContent: "center" }}>
+        <Text
+          style={{
+            fontFamily: focused ? "Poppins-Bold" : "Poppins",
+            fontSize: 18,
+            marginTop: 30,
+            width: "100%",
+            height: "100%",
+          }}
+        >
           {title}
         </Text>
       </View>
@@ -71,9 +78,9 @@ function createTabOptions(title: string, colorScheme: 'light' | 'dark' | null | 
     ),
     headerTitleStyle: {
       color: currentColors.text,
-      fontWeight: 'bold' as const,
+      fontWeight: "bold" as const,
       marginBottom: 32,
-      fontFamily: 'Poppins-Bold',
+      fontFamily: "Poppins-Bold",
     },
     headerStyle: {
       backgroundColor: currentColors.background,
@@ -90,27 +97,28 @@ function createTabOptions(title: string, colorScheme: 'light' | 'dark' | null | 
 }
 
 export default function TabLayout() {
-  const colorScheme = 'light'; // todo: useColorScheme();
+  const colorScheme = "light"; // todo: useColorScheme();
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: colors[colorScheme ?? "light"].tint,
         // Disable the static render of the header on web
         // to prevent a hydration error in React Navigation v6.
         headerShown: useClientOnlyValue(false, true),
-      }}>
+      }}
+    >
       <Tabs.Screen
         name="goalsTab"
-        options={createTabOptions('Goals', colorScheme)}
+        options={createTabOptions("Goals", colorScheme)}
       />
       <Tabs.Screen
         name="index"
-        options={createTabOptions('Habits', colorScheme)}
+        options={createTabOptions("Habits", colorScheme)}
       />
       <Tabs.Screen
         name="streaksTab"
-        options={createTabOptions('Streaks', colorScheme)}
+        options={createTabOptions("Streaks", colorScheme)}
       />
     </Tabs>
   );
