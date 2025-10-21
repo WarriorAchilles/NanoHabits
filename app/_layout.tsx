@@ -5,9 +5,10 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
+import { Stack, router } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import { Pressable, Text } from "react-native";
 import "react-native-reanimated";
 
 import { useColorScheme } from "@/components/useColorScheme";
@@ -81,6 +82,21 @@ function RootLayoutNav() {
             headerShown: true,
             title: "Modal",
             headerBackTitle: "Back",
+            headerLeft: () => (
+              <Pressable
+                onPress={() => router.back()}
+                style={{ marginLeft: 15 }}
+              >
+                <Text style={{ fontSize: 16, color: "#007AFF" }}>Done</Text>
+              </Pressable>
+            ),
+            headerStyle: {
+              backgroundColor: "#fff",
+            },
+            headerTitleStyle: {
+              color: "#000",
+              fontWeight: "bold",
+            },
           }}
         />
       </Stack>
