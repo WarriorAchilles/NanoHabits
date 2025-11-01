@@ -66,7 +66,13 @@ export const masterStyles = StyleSheet.create({
     fontWeight: "300",
     marginBottom: spacing.lg,
     fontFamily: fontFamilies.light,
-    fontSize: 28,
+    fontSize: 32,
+  },
+  habitName: {
+    color: colors.light.text,
+    fontWeight: "300",
+    fontFamily: fontFamilies.light,
+    fontSize: 20,
   },
   divider: {
     width: "80%",

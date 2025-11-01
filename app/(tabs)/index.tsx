@@ -95,7 +95,6 @@ export default function HabitsScreen() {
     >
       <View style={masterStyles.centeredContainer}>
         <Text style={masterStyles.titleLight}>{today}</Text>
-        <View style={masterStyles.divider} />
 
         <Button
           title={showForm ? "Cancel" : "Add Habit"}
@@ -168,30 +167,34 @@ export default function HabitsScreen() {
         )}
 
         {!loading && !error && habits.length > 0 && (
-          <View>
+          <View style={{ width: "100%" }}>
             {habits.map((habit) => (
               <View
                 key={habit.id}
                 style={{
-                  marginVertical: 8,
-                  padding: 16,
+                  marginVertical: 4,
+                  marginHorizontal: 38,
+                  padding: 0,
                   backgroundColor: "#f5f5f5",
                   borderRadius: 8,
+                  width: "100%",
+                  flexDirection: "row",
                 }}
               >
-                <Text style={masterStyles.titleLight}>{habit.name}</Text>
-                <Text style={masterStyles.secondaryText}>
+                <Text style={masterStyles.habitName}>{habit.name}</Text>
+                {/* Debug data */}
+                {/* <Text style={masterStyles.secondaryText}>
                   Frequency: {habit.frequency}
                 </Text>
                 <Text style={masterStyles.secondaryText}>
                   Completions: {habit.completions?.length || 0}
-                </Text>
+                </Text> */}
               </View>
             ))}
           </View>
         )}
 
-        <EditScreenInfo path="app/(tabs)/index.tsx" />
+        {/* <EditScreenInfo path="app/(tabs)/index.tsx" /> */}
       </View>
     </SafeAreaView>
   );
