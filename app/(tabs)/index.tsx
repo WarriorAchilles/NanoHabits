@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Button, TextInput } from "react-native";
+import { View, Text, Button, TextInput, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import EditScreenInfo from "@/components/EditScreenInfo";
 import { masterStyles } from "@/constants/tokens";
@@ -25,6 +25,7 @@ type HabitWithCompletions = {
 export default function HabitsScreen() {
   const [habits, setHabits] = useState<HabitWithCompletions[]>([]);
   const [loading, setLoading] = useState(false);
+  const [checkedHabits, setCheckedHabits] = useState<Set<string>>(new Set());
   const [error, setError] = useState<string | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({
@@ -55,6 +56,18 @@ export default function HabitsScreen() {
 
   const handleFormChange = (field: string, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const toggleHabitCompletion = (habitId: string) => {
+    setCheckedHabits((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(habitId)) {
+        newSet.delete(habitId);
+      } else {
+        newSet.add(habitId);
+      }
+      return newSet;
+    });
   };
 
   const handleSubmit = async () => {
@@ -168,29 +181,57 @@ export default function HabitsScreen() {
 
         {!loading && !error && habits.length > 0 && (
           <View style={{ width: "100%" }}>
-            {habits.map((habit) => (
-              <View
-                key={habit.id}
-                style={{
-                  marginVertical: 4,
-                  marginHorizontal: 38,
-                  padding: 0,
-                  backgroundColor: "#f5f5f5",
-                  borderRadius: 8,
-                  width: "100%",
-                  flexDirection: "row",
-                }}
-              >
-                <Text style={masterStyles.habitName}>{habit.name}</Text>
-                {/* Debug data */}
-                {/* <Text style={masterStyles.secondaryText}>
+            {habits.map((habit) => {
+              const isChecked = checkedHabits.has(habit.id);
+              return (
+                <View
+                  key={habit.id}
+                  style={{
+                    marginVertical: 4,
+                    marginHorizontal: 38,
+                    padding: 12,
+                    backgroundColor: "#f5f5f5",
+                    borderRadius: 8,
+                    width: "100%",
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}
+                >
+                  <TouchableOpacity
+                    onPress={() => toggleHabitCompletion(habit.id)}
+                    style={{
+                      width: 24,
+                      height: 24,
+                      borderRadius: 12,
+                      borderWidth: 2,
+                      borderColor: "#1A1A1A",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginRight: 12,
+                    }}
+                  >
+                    {isChecked && (
+                      <View
+                        style={{
+                          width: 12,
+                          height: 12,
+                          borderRadius: 6,
+                          backgroundColor: "#1A1A1A",
+                        }}
+                      />
+                    )}
+                  </TouchableOpacity>
+                  <Text style={masterStyles.habitName}>{habit.name}</Text>
+                  {/* Debug data */}
+                  {/* <Text style={masterStyles.secondaryText}>
                   Frequency: {habit.frequency}
                 </Text>
                 <Text style={masterStyles.secondaryText}>
                   Completions: {habit.completions?.length || 0}
                 </Text> */}
-              </View>
-            ))}
+                </View>
+              );
+            })}
           </View>
         )}
 
