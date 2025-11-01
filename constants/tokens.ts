@@ -53,6 +53,13 @@ export const masterStyles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: colors.light.background,
   },
+  leftAlignedContainer: {
+    flex: 1,
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    backgroundColor: colors.light.background,
+    marginHorizontal: 24,
+  },
   // Typography
   titleBold: {
     color: colors.light.text,
