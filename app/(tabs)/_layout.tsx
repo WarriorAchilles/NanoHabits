@@ -1,66 +1,49 @@
 import React from "react";
-import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { Link, Tabs } from "expo-router";
 import { Pressable, View, Text, Image } from "react-native";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 import { colors } from "@/constants/tokens";
-// import { useColorScheme } from '@/components/useColorScheme';
 import { useClientOnlyValue } from "@/components/useClientOnlyValue";
 
-// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-// NanoHabits icon component for header left
 function NanoHabitsIcon() {
   return (
     <Image
       source={require("../../assets/images/nanohabits-icon.png")}
-      style={{
-        width: 80,
-        height: 80,
-        resizeMode: "contain",
-      }}
+      style={{ width: 80, height: 80, resizeMode: "contain" }}
     />
   );
 }
 
-// Reusable tab configuration function
-function createTabOptions(
-  title: string,
-  colorScheme: "light" | "dark" | null | undefined
-) {
-  const currentColors = colors[colorScheme ?? "light"];
+function TabLabel({
+  title,
+  focused,
+  color,
+}: {
+  title: string;
+  focused: boolean;
+  color: string;
+}) {
+  return (
+    <Text
+      style={{
+        fontFamily: focused ? "Poppins-Bold" : "Poppins",
+        fontSize: 15,
+        color,
+      }}
+    >
+      {title}
+    </Text>
+  );
+}
 
-  return {
-    title,
+export default function TabLayout() {
+  const colorScheme = "light";
+  const currentColors = colors[colorScheme];
+
+  const sharedScreenOptions = {
     headerTitleAlign: "center" as const,
-    headerTitle: () => (
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <Text
-          style={{
-            color: currentColors.text,
-            fontWeight: "bold" as const,
-            fontFamily: "Poppins-Bold",
-            fontSize: 24,
-          }}
-        >
-          {title}
-        </Text>
-      </View>
-    ),
-    tabBarIcon: ({ focused }: { focused: boolean }) => (
-      <View style={{ alignItems: "center", justifyContent: "center" }}>
-        <Text
-          style={{
-            fontFamily: focused ? "Poppins-Bold" : "Poppins",
-            fontSize: 18,
-            marginTop: 30,
-            width: "100%",
-            height: "100%",
-          }}
-        >
-          {title}
-        </Text>
-      </View>
-    ),
+    headerTitle: () => null,
     headerLeft: () => <NanoHabitsIcon />,
     headerRight: () => (
       <Link href="/modal" asChild>
@@ -76,49 +59,64 @@ function createTabOptions(
         </Pressable>
       </Link>
     ),
-    headerTitleStyle: {
-      color: currentColors.text,
-      fontWeight: "bold" as const,
-      marginBottom: 32,
-      fontFamily: "Poppins-Bold",
-    },
-    headerStyle: {
-      backgroundColor: currentColors.background,
-    },
-    headerTintColor: currentColors.text,
+    headerStyle: { backgroundColor: currentColors.background },
     headerShadowVisible: false,
-    tabBarShowLabel: false,
+    tabBarShowLabel: true,
+    tabBarIconStyle: { display: "none" as const, height: 0 },
+    tabBarItemStyle: {
+      justifyContent: "center" as const,
+      alignItems: "center" as const,
+      paddingTop: 0,
+      paddingBottom: 0,
+    },
     tabBarStyle: {
       backgroundColor: currentColors.background,
-      borderTopWidth: 1, // Increase this value to make the divider thicker
-      borderTopColor: currentColors.divider, // Use the divider color from your theme
+      borderTopWidth: 1,
+      borderTopColor: currentColors.divider,
+      height: 52,
+      paddingBottom: 0,
+      paddingTop: 0,
     },
+    tabBarActiveTintColor: currentColors.text,
+    tabBarInactiveTintColor: currentColors.tabIconDefault,
   };
-}
-
-export default function TabLayout() {
-  const colorScheme = "light";
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: colors[colorScheme ?? "light"].tint,
-        // Disable the static render of the header on web
-        // to prevent a hydration error in React Navigation v6.
-        headerShown: useClientOnlyValue(false, true),
+        headerShown: useClientOnlyValue(false, true) as boolean,
+        ...sharedScreenOptions,
       }}
     >
       <Tabs.Screen
         name="goalsTab"
-        options={createTabOptions("Goals", colorScheme)}
+        options={{
+          title: "Goals",
+          tabBarIcon: () => null,
+          tabBarLabel: ({ focused, color }) => (
+            <TabLabel title="Goals" focused={focused} color={color} />
+          ),
+        }}
       />
       <Tabs.Screen
         name="index"
-        options={createTabOptions("Habits", colorScheme)}
+        options={{
+          title: "Habits",
+          tabBarIcon: () => null,
+          tabBarLabel: ({ focused, color }) => (
+            <TabLabel title="Habits" focused={focused} color={color} />
+          ),
+        }}
       />
       <Tabs.Screen
         name="streaksTab"
-        options={createTabOptions("Streaks", colorScheme)}
+        options={{
+          title: "Streaks",
+          tabBarIcon: () => null,
+          tabBarLabel: ({ focused, color }) => (
+            <TabLabel title="Streaks" focused={focused} color={color} />
+          ),
+        }}
       />
     </Tabs>
   );

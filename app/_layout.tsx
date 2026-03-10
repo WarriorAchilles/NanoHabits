@@ -96,8 +96,7 @@ function RootLayoutNav() {
           options={{
             presentation: "modal",
             headerShown: true,
-            title: "Modal",
-            headerBackTitle: "Back",
+            title: "Settings",
             headerLeft: () => (
               <Pressable
                 onPress={() => router.back()}
@@ -106,12 +105,10 @@ function RootLayoutNav() {
                 <Text style={{ fontSize: 16, color: "#007AFF" }}>Done</Text>
               </Pressable>
             ),
-            headerStyle: {
-              backgroundColor: "#fff",
-            },
+            headerStyle: { backgroundColor: "#fff" },
             headerTitleStyle: {
               color: "#000",
-              fontWeight: "bold",
+              fontFamily: "Poppins-Bold",
             },
           }}
         />
