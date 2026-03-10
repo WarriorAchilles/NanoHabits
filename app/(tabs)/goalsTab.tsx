@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
   ActivityIndicator,
+  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useFocusEffect } from "expo-router";
@@ -121,7 +122,31 @@ export default function GoalsScreen() {
         {/* Goals list */}
         {goals.map((goal) => (
           <View key={goal.id} style={{ marginTop: 28 }}>
-            <Text style={masterStyles.titleBold}>{goal.name}</Text>
+            <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+              <Text style={masterStyles.titleBold}>{goal.name}</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  Alert.alert(
+                    "Delete Goal",
+                    `Delete "${goal.name}"? All associated habits will also be removed.`,
+                    [
+                      { text: "Cancel", style: "cancel" },
+                      {
+                        text: "Delete",
+                        style: "destructive",
+                        onPress: async () => {
+                          await DatabaseService.deleteGoal(goal.id);
+                          load();
+                        },
+                      },
+                    ]
+                  );
+                }}
+                style={{ padding: 4 }}
+              >
+                <Text style={{ fontSize: 18, color: "#999", lineHeight: 22 }}>×</Text>
+              </TouchableOpacity>
+            </View>
             {goal.habits.length === 0 ? (
               <Text
                 style={[

@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
   ActivityIndicator,
+  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useFocusEffect } from "expo-router";
@@ -200,47 +201,73 @@ export default function HabitsScreen() {
         {habits.map((habit) => {
           const isChecked = checkedHabits.has(habit.id);
           return (
-            <TouchableOpacity
+            <View
               key={habit.id}
-              onPress={() => toggleHabitCompletion(habit.id)}
               style={{
                 flexDirection: "row",
                 alignItems: "center",
                 marginVertical: 6,
               }}
             >
-              <View
-                style={{
-                  width: 24,
-                  height: 24,
-                  borderRadius: 12,
-                  borderWidth: 2,
-                  borderColor: "#1A1A1A",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginRight: 12,
+              <TouchableOpacity
+                onPress={() => toggleHabitCompletion(habit.id)}
+                style={{ flexDirection: "row", alignItems: "center", flex: 1 }}
+              >
+                <View
+                  style={{
+                    width: 24,
+                    height: 24,
+                    borderRadius: 12,
+                    borderWidth: 2,
+                    borderColor: "#1A1A1A",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginRight: 12,
+                  }}
+                >
+                  {isChecked && (
+                    <View
+                      style={{
+                        width: 12,
+                        height: 12,
+                        borderRadius: 6,
+                        backgroundColor: "#1A1A1A",
+                      }}
+                    />
+                  )}
+                </View>
+                <Text
+                  style={[
+                    masterStyles.habitName,
+                    isChecked && { opacity: 0.4 },
+                  ]}
+                >
+                  {habit.name}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  Alert.alert(
+                    "Delete Habit",
+                    `Delete "${habit.name}"?`,
+                    [
+                      { text: "Cancel", style: "cancel" },
+                      {
+                        text: "Delete",
+                        style: "destructive",
+                        onPress: async () => {
+                          await DatabaseService.deleteHabit(habit.id);
+                          load();
+                        },
+                      },
+                    ]
+                  );
                 }}
+                style={{ padding: 4 }}
               >
-                {isChecked && (
-                  <View
-                    style={{
-                      width: 12,
-                      height: 12,
-                      borderRadius: 6,
-                      backgroundColor: "#1A1A1A",
-                    }}
-                  />
-                )}
-              </View>
-              <Text
-                style={[
-                  masterStyles.habitName,
-                  isChecked && { opacity: 0.4 },
-                ]}
-              >
-                {habit.name}
-              </Text>
-            </TouchableOpacity>
+                <Text style={{ fontSize: 18, color: "#999", lineHeight: 22 }}>×</Text>
+              </TouchableOpacity>
+            </View>
           );
         })}
 
